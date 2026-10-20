@@ -76,6 +76,7 @@ def main():
     ap.add_argument("--density", type=float, default=1.0)
     ap.add_argument("--cover", default=None)
     ap.add_argument("--preview", type=float, default=0.0, help="preview start, seconds")
+    ap.add_argument("--fast", action="store_true", help="faster charting")
     ap.add_argument("--force", action="store_true")
     args = ap.parse_args()
 
@@ -105,8 +106,11 @@ def main():
 
     print("== chart ==")
     mid = os.path.join(outdir, short + ".mid")
-    subprocess.run([py, os.path.join(HERE, "rb3_chart.py"), mp3,
-                    "-o", outdir, "--density", str(args.density)], check=True)
+    cmd = [py, os.path.join(HERE, "rb3_chart.py"), mp3,
+           "-o", outdir, "--density", str(args.density)]
+    if args.fast:
+        cmd.append("--fast")
+    subprocess.run(cmd, check=True)
     os.replace(os.path.join(outdir, stem + "_chart.mid"), mid)
 
     print("== onyx ==")

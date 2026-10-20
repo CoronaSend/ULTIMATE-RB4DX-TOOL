@@ -32,6 +32,7 @@ import numpy as np
 TPQ = 480          # ticks per quarter note
 HOP = 512          # STFT hop
 NFFT = 2048
+FAST = False
 
 # lane indices: green=0 red=1 yellow=2 blue=3 orange=4
 G_BASE = {"easy": 60, "medium": 72, "hard": 84, "expert": 96}
@@ -141,7 +142,7 @@ def analyze(path):
     try:
         onsets = librosa.onset.onset_detect(
             onset_envelope=env, sr=sr, hop_length=HOP, units="time",
-            backtrack=True, energy=env)
+            backtrack=(not FAST), energy=env)
     except TypeError:
         onsets = librosa.onset.onset_detect(
             onset_envelope=env, sr=sr, hop_length=HOP, units="time")
@@ -598,9 +599,11 @@ def main():
     ap.add_argument("-o", "--outdir", default=None)
     ap.add_argument("--instruments", default="guitar,bass,drums")
     ap.add_argument("--density", type=float, default=1.0, help="note density multiplier (0.6 easier, 1.4 busier)")
+    ap.add_argument("--fast", action="store_true", help="faster, slightly less accurate charting")
     args = ap.parse_args()
-    global DENSITY
+    global DENSITY, FAST
     DENSITY = max(0.3, min(2.0, args.density))
+    FAST = bool(args.fast)
 
     mp3 = os.path.abspath(args.mp3)
     stem = os.path.splitext(os.path.basename(mp3))[0]

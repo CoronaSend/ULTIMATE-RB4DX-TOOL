@@ -148,8 +148,8 @@ class SongTool : Form
                 MinimumSize = Size; BackColor = BG; ForeColor = TEXT; StartPosition = FormStartPosition.CenterScreen;
         AllowDrop = true;
 
-        drop = new DropZone { Text = "\u266B  DROP YOUR MP3s HERE  \u266B", Dock = DockStyle.Top, Height = 110,
-            Font = new Font("Impact", 22), AllowDrop = true };
+        drop = new DropZone { Text = "\u266B  DROP YOUR MP3s HERE  \u266B", Dock = DockStyle.Top, Height = 120,
+            Font = new Font("Impact", 24), AllowDrop = true, TextAlign = ContentAlignment.MiddleCenter };
 
         var opts = new Panel { Dock = DockStyle.Top, Height = 40, BackColor = BG };
         bundle = new CheckBox { Text = "BUNDLE all songs into ONE package:", Left = 14, Top = 10, Width = 270, ForeColor = TEXT,
@@ -165,20 +165,17 @@ class SongTool : Form
         web.Anchor = AnchorStyles.Top | AnchorStyles.Left; web.Top = 5;
         web.Click += (s, e) => WebSearch();
         opts.Controls.Add(web);
-<<<<<<< HEAD
-=======
         var ytmp3 = Btn("MP3 SEARCH", Color.FromArgb(200, 50, 50), 736, 90);
         ytmp3.Anchor = AnchorStyles.Top | AnchorStyles.Left; ytmp3.Top = 5; ytmp3.ForeColor = Color.White;
         ytmp3.Click += (s, e) => Mp3Search();
         opts.Controls.Add(ytmp3);
->>>>>>> cd46517 (v1.1.4 - MP3 SEARCH overhaul + credits popup)
         drop.Cursor = Cursors.Hand;
         drop.Click += (s, e) => Browse();
         KeyPreview = true;
         KeyDown += (s, e) => { if (e.Control && e.KeyCode == Keys.O) Browse(); };
 
-        list = new ListView { Dock = DockStyle.Top, Height = 160, View = View.Details, FullRowSelect = true, OwnerDraw = true,
-            BackColor = PANEL, ForeColor = TEXT, BorderStyle = BorderStyle.None, Font = new Font("Segoe UI", 10) };
+        list = new ListView { Dock = DockStyle.Top, Height = 176, View = View.Details, FullRowSelect = true, OwnerDraw = true,
+            BackColor = PANEL, ForeColor = TEXT, BorderStyle = BorderStyle.None, Font = new Font("Segoe UI", 9) };
         list.Columns.Add("SONG", 244); list.Columns.Add("1. CHART + AUDIO", 150); list.Columns.Add("2. PS4 PKG", 150); list.Columns.Add("3. SEND TO PS4", 150);
         list.DrawColumnHeader += (s, e) =>
         {
@@ -208,16 +205,16 @@ class SongTool : Form
         prog.Controls.Add(cancelBtn);
 
         log = new TextBox { Multiline = true, ReadOnly = true, Dock = DockStyle.Fill, ScrollBars = ScrollBars.Vertical,
-            Font = new Font("Consolas", 9), BackColor = Color.FromArgb(10, 10, 12), ForeColor = Color.FromArgb(170, 220, 170),
+            Font = new Font("Cascadia Mono", 9), BackColor = Color.FromArgb(10, 10, 12), ForeColor = Color.FromArgb(190, 235, 190),
             BorderStyle = BorderStyle.None };
 
-        var header = new Panel { Dock = DockStyle.Top, Height = 62, Width = 740, BackColor = Color.FromArgb(8, 8, 10) };
-        var title = new Label { Text = "TOOL MADE BY CORONASEND", ForeColor = Color.White, AutoSize = false,
-            Left = 12, Top = 4, Width = 390, Height = 36, TextAlign = ContentAlignment.MiddleLeft, Font = new Font("Impact", 20) };
-        var sub = new Label { Text = "ULTIMATE RB4DX TOOL:  MP3  \u2192  CHART  \u2192  PS4 PKG", ForeColor = DIM, AutoSize = false,
-            Left = 14, Top = 38, Width = 430, Height = 20, Font = new Font("Segoe UI", 8, FontStyle.Bold) };
+        var header = new Panel { Dock = DockStyle.Top, Height = 70, Width = 740, BackColor = Color.FromArgb(10, 10, 14) };
+        var title = new Label { Text = "ULTIMATE RB4DX TOOL", ForeColor = Color.White, AutoSize = false,
+            Left = 14, Top = 6, Width = 500, Height = 38, TextAlign = ContentAlignment.MiddleLeft, Font = new Font("Impact", 26) };
+        var sub = new Label { Text = "MP3 \u2192 Auto Chart \u2192 RB3 CON \u2192 PS4 PKG | Made by CoronaSend", ForeColor = DIM, AutoSize = false,
+            Left = 16, Top = 46, Width = 600, Height = 18, Font = new Font("Segoe UI", 8) };
         header.Controls.Add(title); header.Controls.Add(sub);
-        var stripe = new Panel { Dock = DockStyle.Top, Height = 4, BackColor = RED };
+        var stripe = new Panel { Dock = DockStyle.Top, Height = 3, BackColor = RED };
         stripe.Paint += (s, e) =>
         {
             using (var b = new System.Drawing.Drawing2D.LinearGradientBrush(stripe.ClientRectangle, RED, ORANGE, 0f))
@@ -263,10 +260,7 @@ class SongTool : Form
         TB("COPY LOG", Color.FromArgb(70, 70, 90), 186, 80, CopyLog);
         TB("CLEAN UP", Color.FromArgb(70, 70, 90), 270, 80, CleanAll);
         TB("HELP / REPORT BUG", Color.FromArgb(88, 101, 242), 596, 132, OpenDiscord);
-<<<<<<< HEAD
-=======
         TB("MP3 SEARCH", Color.FromArgb(200, 50, 50), 732, 80, Mp3Search);
->>>>>>> cd46517 (v1.1.4 - MP3 SEARCH overhaul + credits popup)
         toolsRow.Controls.Add(new Label { Text = "Chart:", Left = 366, Top = 12, Width = 44, ForeColor = TEXT, Font = new Font("Segoe UI", 9, FontStyle.Bold) });
         densityBox = new ComboBox { Left = 410, Top = 8, Width = 86, DropDownStyle = ComboBoxStyle.DropDownList, BackColor = PANEL, ForeColor = ORANGE, FlatStyle = FlatStyle.Flat };
         densityBox.Items.AddRange(new object[] { "Easier", "Normal", "Busier" }); densityBox.SelectedIndex = 1;
@@ -434,8 +428,6 @@ class SongTool : Form
         dlg.ShowDialog(this);
     }
 
-<<<<<<< HEAD
-=======
     string FindFfmpeg()
     {
         try
@@ -579,14 +571,15 @@ class SongTool : Form
             grid.Columns.Add("Title", "TITLE");
             grid.Columns.Add("Uploader", "ARTIST / UPLOADER");
             grid.Columns.Add("Duration", "DURATION");
-            var dlCol = new DataGridViewButtonColumn { Name = "Download", HeaderText = "", Text = "DOWNLOAD", UseColumnTextForButtonValue = true, Width = 100 };
-            grid.Columns.Add(dlCol);
+            grid.Columns.Add(new DataGridViewButtonColumn { Name = "Preview", HeaderText = "", Text = "PREVIEW", UseColumnTextForButtonValue = true, Width = 70 });
+            grid.Columns.Add(new DataGridViewButtonColumn { Name = "Download", HeaderText = "", Text = "DOWNLOAD", UseColumnTextForButtonValue = true, Width = 90 });
             grid.Columns.Add("Id", "ID");
             grid.Columns["Id"].Visible = false;
-            grid.Columns["Title"].FillWeight = 46;
-            grid.Columns["Uploader"].FillWeight = 30;
-            grid.Columns["Duration"].FillWeight = 14;
-            grid.Columns["Download"].FillWeight = 10;
+            grid.Columns["Title"].FillWeight = 42;
+            grid.Columns["Uploader"].FillWeight = 28;
+            grid.Columns["Duration"].FillWeight = 12;
+            grid.Columns["Preview"].FillWeight = 9;
+            grid.Columns["Download"].FillWeight = 9;
             var downloadedFiles = new List<string>();
             object dlLock = new object();
             var dlQueue = new Queue<DlJob>();
@@ -632,8 +625,8 @@ class SongTool : Form
                         searchBtn.Enabled = true;
                         if (err != null) { status.Text = err; return; }
                         foreach (var r in rows)
-                            grid.Rows.Add(r[1], r[2], r[3], "DOWNLOAD", r[0]);
-                        status.Text = rows.Count + " result(s). Click DOWNLOAD on a row, or select several and use DOWNLOAD SELECTED.";
+                            grid.Rows.Add(r[1], r[2], r[3], "PREVIEW", "DOWNLOAD", r[0]);
+                        status.Text = rows.Count + " result(s). Click PREVIEW to play, or DOWNLOAD to fetch.";
                     });
                 }) { IsBackground = true }.Start();
             };
@@ -738,12 +731,117 @@ class SongTool : Form
                 return true;
             };
 
+            // In-tool preview state
+            int previewRow = -1;
+            string previewId = null;
+            bool previewPlaying = false;
+            string previewFile = null;
+            Action StopPreview = () =>
+            {
+                try { mciSendString("close rb4prev", null, 0, IntPtr.Zero); } catch { }
+                previewPlaying = false;
+                previewId = null;
+                if (previewRow >= 0 && previewRow < grid.Rows.Count)
+                {
+                    try
+                    {
+                        string st = System.Convert.ToString(grid.Rows[previewRow].Cells["Preview"].Value);
+                        if (st == "STOP") grid.Rows[previewRow].Cells["Preview"].Value = "PREVIEW";
+                    }
+                    catch { }
+                }
+                previewRow = -1;
+                try { if (previewFile != null && File.Exists(previewFile)) File.Delete(previewFile); } catch { }
+                previewFile = null;
+            };
+            dlg.FormClosed += (s, e) => { try { StopPreview(); } catch { } lock (dlLock) dlQueue.Clear(); };
+
             grid.CellContentClick += (s, e) =>
             {
                 if (e.RowIndex < 0) return;
-                if (grid.Columns[e.ColumnIndex].Name != "Download") return;
-                if (QueueRow(e.RowIndex))
-                    status.Text = "Queued: " + System.Convert.ToString(grid.Rows[e.RowIndex].Cells["Title"].Value);
+                if (grid.Columns[e.ColumnIndex].Name == "Preview")
+                {
+                    string id = System.Convert.ToString(grid.Rows[e.RowIndex].Cells["Id"].Value);
+                    string title = System.Convert.ToString(grid.Rows[e.RowIndex].Cells["Title"].Value);
+                    if (string.IsNullOrWhiteSpace(id)) return;
+                    if (previewPlaying && previewRow == e.RowIndex)
+                    {
+                        StopPreview();
+                        status.Text = "Stopped preview.";
+                        return;
+                    }
+                    StopPreview();
+                    previewRow = e.RowIndex;
+                    previewId = id;
+                    grid.Rows[e.RowIndex].Cells["Preview"].Value = "LOADING";
+                    status.Text = "Loading 30s preview for " + title + "...";
+                    new Thread(() =>
+                    {
+                        string err = null;
+                        string got = null;
+                        try
+                        {
+                            string outDir = Path.GetTempPath();
+                            string ffd = PrepareFfmpegDir();
+                            string url = "https://www.youtube.com/watch?v=" + id;
+                            string tmpOut = Path.Combine(outDir, "rb4prev_" + id + ".%(ext)s");
+                            string args = "\"" + url + "\" --extract-audio --audio-format mp3 --no-playlist --no-warnings " +
+                                          "--downloader ffmpeg --downloader-args \"ffmpeg_i:-ss 00:00:00 -t 30\" " +
+                                          (ffd != null ? "--ffmpeg-location \"" + ffd + "\" " : "") +
+                                          "-o \"" + tmpOut + "\"";
+                            int code;
+                            string stdout = RunYtdlp(args, null, out code);
+                            foreach (var l in stdout.Split('\n'))
+                            {
+                                var t = l.Trim();
+                                if (t.EndsWith(".mp3", StringComparison.OrdinalIgnoreCase) && File.Exists(t)) { got = t; break; }
+                            }
+                            if (got == null)
+                            {
+                                var mp3s = Directory.GetFiles(outDir, "rb4prev_" + id + "*.mp3").OrderByDescending(File.GetLastWriteTime).ToArray();
+                                if (mp3s.Length > 0) got = mp3s[0];
+                            }
+                            if (got == null) err = "Could not load preview" + (code != 0 ? " (yt-dlp exit code " + code + ")" : "") + ".";
+                        }
+                        catch (Exception ex) { err = ex.Message; }
+                        string fileGot = got, fileErr = err;
+                        try
+                        {
+                            dlg.BeginInvoke((MethodInvoker)delegate
+                            {
+                                if (previewRow != e.RowIndex || previewId != id) { if (fileGot != null) try { File.Delete(fileGot); } catch { } return; }
+                                if (fileGot == null)
+                                {
+                                    grid.Rows[e.RowIndex].Cells["Preview"].Value = "PREVIEW";
+                                    status.Text = "Preview failed: " + fileErr;
+                                    return;
+                                }
+                                previewFile = fileGot;
+                                try
+                                {
+                                    mciSendString("close rb4prev", null, 0, IntPtr.Zero);
+                                    mciSendString("open \"" + previewFile + "\" type mpegvideo alias rb4prev", null, 0, IntPtr.Zero);
+                                    mciSendString("play rb4prev from 0", null, 0, IntPtr.Zero);
+                                    previewPlaying = true;
+                                    grid.Rows[e.RowIndex].Cells["Preview"].Value = "STOP";
+                                    status.Text = "Playing preview: " + title;
+                                }
+                                catch (Exception ex2)
+                                {
+                                    grid.Rows[e.RowIndex].Cells["Preview"].Value = "PREVIEW";
+                                    status.Text = "Could not play preview: " + ex2.Message;
+                                }
+                            });
+                        }
+                        catch { if (fileGot != null) try { File.Delete(fileGot); } catch { } }
+                    }) { IsBackground = true }.Start();
+                    return;
+                }
+                if (grid.Columns[e.ColumnIndex].Name == "Download")
+                {
+                    if (QueueRow(e.RowIndex))
+                        status.Text = "Queued: " + System.Convert.ToString(grid.Rows[e.RowIndex].Cells["Title"].Value);
+                }
             };
             grid.CellDoubleClick += (s, e) => { if (e.RowIndex >= 0) QueueRow(e.RowIndex); };
 
@@ -784,7 +882,6 @@ class SongTool : Form
         }
     }
 
->>>>>>> cd46517 (v1.1.4 - MP3 SEARCH overhaul + credits popup)
     void Browse()
     {
         if (!drop.Enabled) return;
@@ -804,11 +901,7 @@ class SongTool : Form
         Start(((string[])e.Data.GetData(DataFormats.FileDrop)));
     }
 
-<<<<<<< HEAD
-    const string VERSION = "1.1.3";
-=======
     const string VERSION = "1.1.4";
->>>>>>> cd46517 (v1.1.4 - MP3 SEARCH overhaul + credits popup)
 
     StringBuilder tail = new StringBuilder();
     double density = 1.0; bool eu;
@@ -828,18 +921,6 @@ class SongTool : Form
 
     void ShowCredits()
     {
-<<<<<<< HEAD
-        MessageBox.Show(
-            "ULTIMATE RB4DX TOOL v" + VERSION + " - made by CoronaSend\r\n\r\n" +
-            "Built on the work of:\r\n" +
-            "  - Onyx - Michael Tolly (mtolly) - GPL v3\r\n" +
-            "  - LibForge / ForgeTool - Maxton; fork by LlysiX and mtolly - LGPL/GPL\r\n" +
-            "  - RB4DX and the Rock Band modding community\r\n" +
-            "  - librosa, numpy, FFmpeg and other open-source libraries\r\n" +
-            "  - iTunes, Internet Archive and Jamendo (cover art / free music search)\r\n\r\n" +
-            "Full licenses: THIRD-PARTY-NOTICES.md and README.md",
-            "Credits", MessageBoxButtons.OK, MessageBoxIcon.Information);
-=======
         using (var dlg = new Form
         {
             Text = "Credits & Acknowledgements",
@@ -934,7 +1015,6 @@ class SongTool : Form
             Style(dlg);
             dlg.ShowDialog(this);
         }
->>>>>>> cd46517 (v1.1.4 - MP3 SEARCH overhaul + credits popup)
     }
 
     void OpenDiscord()
@@ -1466,12 +1546,6 @@ class SongTool : Form
     static void Names(string mp3, out string artist, out string title)
     {
         string stem = Path.GetFileNameWithoutExtension(mp3);
-<<<<<<< HEAD
-        stem = Regex.Replace(stem, @"\(mp3\.pm\)|\[.*?\]", "").Trim(' ', '_', '-');
-        artist = "Unknown"; title = stem;
-        var parts = stem.Split(new[] { "_-_", " - " }, 2, StringSplitOptions.None);
-        if (parts.Length == 2) { artist = parts[0].Replace('_', ' ').Trim(); title = parts[1].Replace('_', ' ').Trim(); }
-=======
         stem = Regex.Replace(stem, @"\(mp3\.pm\)|\[.*?\]|\(.*?\)", "").Trim(' ', '_', '-');
         // collapse multiple spaces left behind by stripping
         stem = Regex.Replace(stem, @"\s{2,}", " ").Trim();
@@ -1483,7 +1557,6 @@ class SongTool : Form
         title = Regex.Replace(title, @"\s{2,}", " ").Trim();
         if (artist.Length == 0) artist = "Unknown";
         if (title.Length == 0) title = "Untitled";
->>>>>>> cd46517 (v1.1.4 - MP3 SEARCH overhaul + credits popup)
     }
 
     string Convert(string mp3, ListViewItem row, bool makePkg, int n, int count)
@@ -1504,20 +1577,6 @@ class SongTool : Form
                 doneSteps += makePkg ? 2 + (sendOn ? 1 : 0) : 1; SetProgress(tag + "cancelled");
                 return null;
             }
-<<<<<<< HEAD
-            string bstem = Path.GetFileNameWithoutExtension(mp3).Replace("(mp3.pm)", "").Trim('_', '-', ' ');
-            if (bstem.Length > 40)
-            {
-                using (var md5 = System.Security.Cryptography.MD5.Create())
-                {
-                    string hex = BitConverter.ToString(md5.ComputeHash(Encoding.UTF8.GetBytes(bstem))).Replace("-", "").ToLowerInvariant();
-                    bstem = bstem.Substring(0, 30).TrimEnd('.', '_', ' ') + "_" + hex.Substring(0, 8);
-                }
-            }
-            string buildDir = Path.Combine(root, "build", bstem);
-            string con = Directory.Exists(buildDir) ? Directory.GetFiles(buildDir, "*.con")
-                .OrderByDescending(File.GetLastWriteTime).FirstOrDefault() : null;
-=======
             DateTime buildStart = DateTime.Now;
             // build_song.py now uses a safe ASCII slug for its folder, so locate the
             // freshly produced .con anywhere under build\ instead of guessing the name.
@@ -1525,7 +1584,6 @@ class SongTool : Form
                 .Where(f => File.GetLastWriteTime(f) >= buildStart.AddSeconds(-5))
                 .OrderByDescending(File.GetLastWriteTime)
                 .FirstOrDefault();
->>>>>>> cd46517 (v1.1.4 - MP3 SEARCH overhaul + credits popup)
             if (rc != 0 || con == null)
             {
                 Say("FAILED: chart step - " + Friendly("", "The chart or audio step failed. Press COPY LOG and paste it in Discord."));
