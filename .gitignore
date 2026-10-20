@@ -1,0 +1,87 @@
+<<<<<<< HEAD
+runtime/
+onyx/
+forge_official/
+build/
+PS4 Packages/
+__pycache__/
+settings.ini
+ps4_ip.txt
+jamendo_key.txt
+update_url.txt
+*.zip
+dist/
+SongTool.exe
+pkg_counter.txt
+hw/
+ULTIMATE RB4DX TOOL.exe
+songtool_preview.png
+=======
+# Build outputs
+build/
+bin/
+obj/
+*.exe
+!ULTIMATE RB4DX TOOL.exe
+*.pdb
+*.cache
+
+# Generated downloads/build products
+Downloads/
+PS4 Packages/
+pkg_counter.txt
+
+# Bundled runtimes / third-party binaries
+runtime/
+onyx/
+forge_official/
+highway_lib/
+yt-dlp.exe
+*.bin
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Test exes
+test*.exe
+
+# Settings/logs
+settings.ini
+*.log
+
+# Temporary
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Keep source and essential text
+!*.cs
+!*.py
+!*.md
+!*.txt
+!*.ico
+!*.png
+!*.ps1
+!LICENSE
+!THIRD-PARTY-NOTICES.md
+!README.md
+!HOW TO USE.md
+!RELEASE_NOTES.md
+!discord.txt
+!make_icon.ps1
+!HighwayMaker.cs
+!CustomizeExtras.cs
+!UltimateTool.cs
+!UltimateTool2.cs
+!audio_info.py
+!build_song.py
+!merge_cons.py
+!rb3_chart.py
+!web_search.py
+!background_template.bin
+!highway_template.png_ps4
+!songtool.ico
+>>>>>>> cd46517 (v1.1.4 - MP3 SEARCH overhaul + credits popup)
